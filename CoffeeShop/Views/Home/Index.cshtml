@@ -1,0 +1,206 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cafe House</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <link href="~/Assest/Client/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assest/Client/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Assest/Client/css/templatemo-style.css" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="shortcut icon" type="image/png" href="~/Assest/Client/img/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Preloader -->
+    <div class="tm-top-header">
+        <div class="container">
+            <div class="row">
+                <div class="tm-top-header-inner">
+                    <div class="tm-logo-container">
+                        <img src="~/Assest/Client/img/logo.png" alt="Logo" class="tm-site-logo">
+                        <h1 class="tm-site-name tm-handwriting-font">Cafe House</h1>
+                    </div>
+                    <div class="mobile-menu-icon">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="tm-nav">
+                        <ul>
+                            <li><a href="/Home" class="active">Trang chủ</a></li>
+                            <li><a href="/News">Tin tức</a></li>
+                            <li><a href="/Product">Menu</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="/Cart"><i class="fas fa-shopping-cart" style="margin-right: 5px"></i>Giỏ hàng</a></li>
+                            @{
+                                var session = (EmployeeLogin)Session[CoffeeShop.Common.CommonConstants.EMPLOYEE_SESSION];
+                            }
+                            @if (session == null)
+                            {
+                                <li><a href="/User/Login">Đăng ký / Đăng nhập</a></li>
+                            }
+                            else
+                            {
+                                var names = Session["Account"].ToString().Split(' ');
+                                <li style="margin-top: 15px">
+                                        Xin chào: @names[2]
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_WelcomeSection")
+    <div class="tm-main-section light-gray-bg">
+        <div class="container" id="main">
+            @Html.Partial("_InfoSection")
+            <section class="tm-section tm-section-margin-bottom-0 row">
+                <div class="col-lg-12 tm-section-header-container">
+                    <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="~/Assest/Client/img/logo.png" alt="Logo" class="tm-site-logo"> Hot drinks</h2>
+                    <div class="tm-hr-container"><hr class="tm-hr"></div>
+                </div>
+                <div class="col-lg-12 tm-popular-items-container">
+                    <div class="tm-popular-item">
+                        <img src="/Assest/Client/img/Latte.png" alt="Popular" class="tm-popular-item-img" style="width: 286px">
+                        <div class="tm-popular-item-description">
+                            <h3 class="tm-handwriting-font tm-popular-item-title"><span class="tm-handwriting-font bigger-first-letter"></span>Latte</h3><hr class="tm-popular-item-hr">
+                            <p>Khi chuẩn bị Latte, cà phê Espresso và sữa nóng được trộn lẫn vào nhau, bên trên vẫn là lớp foam nhưng mỏng và nhẹ hơn Cappucinno.</p>
+                            <div class="order-now-container">
+                                <a href="/Cart/AddItem/8" class="order-now-link tm-handwriting-font">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tm-popular-item">
+                        <img src="/Assest/Client/img/Bacxiu.png" alt="Popular" class="tm-popular-item-img" style="width: 286px">
+                        <div class="tm-popular-item-description">
+                            <h3 class="tm-handwriting-font tm-popular-item-title"><span class="tm-handwriting-font bigger-first-letter"></span>Milk Coffee</h3><hr class="tm-popular-item-hr">
+                            <p>Theo chân những người gốc Hoa đến định cư tại Sài Gòn, Bạc sỉu là cách gọi tắt của "Bạc tẩy sỉu phé" trong tiếng Quảng Đông, chính là: Ly sữa trắng kèm một chút cà phê.</p>
+                            <div class="order-now-container">
+                                <a href="/Cart/AddItem/2" class="order-now-link tm-handwriting-font">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tm-popular-item">
+                        <img src="/Assest/Client/img/machilato.png" alt="Popular" class="tm-popular-item-img" style="width: 286px">
+                        <div class="tm-popular-item-description">
+                            <h3 class="tm-handwriting-font tm-popular-item-title"><span class="tm-handwriting-font bigger-first-letter"></span>Macchiato</h3><hr class="tm-popular-item-hr">
+                            <p>Nước trà thanh hòa quyện cùng hương thơm dịu nhẹ của hoa Nhài tạo nên một hương vị tươi mát, sảng khoái</p>
+                            <div class="order-now-container">
+                                <a href="/Cart/AddItem/29" class="order-now-link tm-handwriting-font">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="tm-section row">
+                <div class="col-lg-12 tm-section-header-container">
+                    <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="~/Assest/Client/img/logo.png" alt="Logo" class="tm-site-logo"> Today's Special</h2>
+                    <div class="tm-hr-container"><hr class="tm-hr"></div>
+                </div>
+                <div class="col-lg-12 tm-special-container margin-top-60">
+                    <div class="tm-special-container-left">
+                        <!-- left -->
+                        <div class="tm-special-item">
+                            <div class="tm-special-img-container">
+                                <img src="~/Assest/Client/img/special-1.jpg" alt="Special" class="tm-special-img img-responsive">
+                                <a href="/Product">
+                                    <div class="tm-special-description">
+                                        <h3 class="tm-special-title">Cappuccino</h3>
+                                        <p>Cappuccino được gọi vui là thức uống "một-phần-ba" - 1/3 Espresso, 1/3 Sữa nóng, 1/3 Foam.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tm-special-container-right">
+                        <!-- right -->
+                        <div>
+                            <div class="tm-special-item">
+                                <div class="tm-special-img-container">
+                                    <img src="~/Assest/Client/img/special-2.jpg" alt="Special" class="img-responsive">
+                                    <a href="/Product">
+                                        <div class="tm-special-description">
+                                            <h3 class="tm-special-title">Cold Brew</h3>
+                                            <p>Mát và sảng khoái là hai từ chính để diễn tả</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tm-special-container-lower">
+                            <div class="tm-special-item">
+                                <div class="tm-special-img-container">
+                                    <img src="~/Assest/Client/img/special-3.jpg" alt="Special" class="img-responsive">
+                                    <a href="/Product">
+                                        <div class="tm-special-description">
+                                            <p>Thức uống trái cây</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="tm-special-item">
+                                <div class="tm-special-img-container">
+                                    <img src="~/Assest/Client/img/special-4.jpg" alt="Special" class="img-responsive">
+                                    <a href="/Product">
+                                        <div class="tm-special-description">
+                                            <p>Bánh & Snack</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="tm-section">
+                <div class="row">
+                    <div class="col-lg-12 tm-section-header-container">
+                        <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="~/Assest/Client/img/logo.png" alt="Logo" class="tm-site-logo"> Daily Menu</h2>
+                        <div class="tm-hr-container"><hr class="tm-hr"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tm-daily-menu-container margin-top-60">
+                        <div class="col-lg-4 col-md-4">
+                            <img src="~/Assest/Client/img/menu-board.png" alt="Menu board" class="tm-daily-menu-img">
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <p>Nhằm phục vụ quý khách hàng tốt nhất có thể, chúng tôi đã lên menu đầy đủ đảm bảo chinh phục những người khó tính nhất</p>
+                            <ol class="margin-top-30">
+                                <li>Cappuccino</li>
+                                <li>Espresso</li>
+                                <li>Latte</li>
+                                <li>Croissant trứng muối</li>
+                                <li>Iced chocolate</li>
+                                <li>Iced coffee</li>
+                                <li>Juice</li>
+                                <li>Cold Brew</li>
+                                <li>Matcha</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <footer>
+        @Html.Partial("_Footer")
+    </footer> <!-- Footer content-->
+    <!-- JS -->
+    <script type="text/javascript" src="~/Assest/Client/js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script type="text/javascript" src="~/Assest/Client/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+</body>
+</html>

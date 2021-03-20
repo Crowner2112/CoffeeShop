@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cafe House Admin</title>
+    <link rel="stylesheet" href="~/Assest/Admin/css/style.css">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Assest/Admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Assest/Admin/vendors/css/vendor.bundle.base.css">
+    <link rel="shortcut icon" type="image/png" href="~/Assest/Client/img/logo.png" />
+
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End Plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <!-- End layout styles -->
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:../../partials/_sidebar.html -->
+        @RenderPage("_Sidebar.cshtml")
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial-->
+            @RenderPage("_Navbar.cshtml")
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">@RenderSection("header", required: true)</h1>
+                        </div>
+                    </div>
+                    @RenderBody()
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                @RenderPage("_Footer.cshtml")
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Assest/Admin/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Assest/Admin/js/off-canvas.js"></script>
+    <script src="~/Assest/Admin/js/hoverable-collapse.js"></script>
+    <script src="~/Assest/Admin/js/misc.js"></script>
+    <script src="~/Assest/Admin/js/settings.js"></script>
+    <script src="~/Assest/Admin/js/todolist.js"></script>
+    <script src="~/Assest/Admin/ckfinder/ckfinder.js"></script>
+    <script src="~/Assest/Admin/ckeditor/ckeditor.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    <!-- endinject -->
+    @*<script src="~/CKFinder/ckfinder.js"></script>*@
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+</body>
+</html>

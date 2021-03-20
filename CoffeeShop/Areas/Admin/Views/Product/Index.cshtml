@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<Models.EF.Product>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    List Product
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-lg-12" style="display: flex">
+                            <div class="col-md-3">
+                                <input type="text" value="@ViewBag.SearchString" name="searchString" class="form-control" placeholder="Search Name" />
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-secondary">
+                                    <i class="mdi mdi-account-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="table-responsive">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Category ID</th>
+                                <th>Price</th>
+                                <th>Promotion Price</th>
+                                <th>Warranty</th>
+                                <th>Created Date</th>
+                                <th>ViewCount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr id="row_@item.ProductID">
+                                <td>@item.ProductID</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.CategoryID</td>
+                                <td>@item.Price</td>
+                                <td>@item.PromotionPrice</td>
+                                <td>@item.Warranty</td>
+                                <td>@item.CreateDate</td>
+                                <td>@item.ViewCount</td>
+                                @if (item.Status == true)
+                                {
+                                    <td><label class="badge badge-success">Avaiable</label></td>
+                                }
+                                else
+                                {
+                                    <td><label class="badge badge-danger">Out of stock</label></td>
+                                }
+                                <td style="display: flex">
+                                    <form style="margin-right: 5px" action="/Admin/Product/Edit/@item.ProductID">
+                                        <button type="submit" class="btn btn-primary">Modify</button>
+                                    </form>
+                                    @Ajax.ActionLink("Delete", "Delete", new { id = item.ProductID },
+                                   new AjaxOptions
+                                   {
+                                       Confirm = "Do you want to delete this product?",
+                                       OnComplete = "$(this).closest('tr').remove()",
+                                       HttpMethod = "Delete"
+                                   }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <hr/>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @ViewBag.searchString }), new PagedListRenderOptions
+               {
+                   LiElementClasses = new string[] { "btn btn-secondary" },
+               })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
