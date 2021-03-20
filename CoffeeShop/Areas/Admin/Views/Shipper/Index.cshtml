@@ -65,7 +65,10 @@
                             }
                         </tbody>
                     </table>
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @ViewBag.searchString }))
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @ViewBag.searchString }), new PagedListRenderOptions
+               {
+                   LiElementClasses = new string[] { "btn btn-secondary" },
+               })
                 </div>
             </div>
         </div>
