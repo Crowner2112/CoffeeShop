@@ -76,7 +76,31 @@ namespace Models.DAO
             }
             else
             {
+                if (result.Password == passWord) return true;
+                else return false;
+            }
+        }
+
+        public bool Update(Customer customer)
+        {
+            try
+            {
+                var rawCustomer = db.Customers.Find(customer.CustomerID);
+                rawCustomer.CustomerID = customer.CustomerID;
+                rawCustomer.CustomerName = customer.CustomerName;
+                rawCustomer.Password = customer.Password;
+                rawCustomer.DOB = customer.DOB;
+                rawCustomer.Email = customer.Email;
+                rawCustomer.Address = customer.Address;
+                rawCustomer.PhoneNumber = customer.PhoneNumber;
+                rawCustomer.CreatedDate = customer.CreatedDate;
+                db.SaveChanges();
                 return true;
+            }
+            catch (Exception)
+            {
+                //logging
+                return false;
             }
         }
     }

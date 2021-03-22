@@ -33,7 +33,7 @@ namespace Models.DAO
             return db.Employees.SingleOrDefault(x => x.Email == Email);
         }
 
-        public Employee GetById(string name)
+        public Employee GetByName(string name)
         {
             return db.Employees.SingleOrDefault(x => x.EmployeeName == name);
         }
@@ -57,6 +57,7 @@ namespace Models.DAO
                 employee.Role = entity.Role;
                 employee.ShopID = entity.ShopID;
                 employee.Status = entity.Status;
+                employee.Image = entity.Image;
                 db.SaveChanges();
                 return true;
             }

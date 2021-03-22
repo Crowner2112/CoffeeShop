@@ -51,10 +51,14 @@ namespace CoffeeShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new EmployeeDao();
+                var rawEmployee = dao.ViewDetail(employee.EmployeeID);
                 if (!string.IsNullOrEmpty(employee.Password))
                 {
-                    var encryptMd5Password = Encryptor.MD5Hash(employee.Password);
-                    employee.Password = encryptMd5Password;
+                    if(employee.Password != rawEmployee.Password)
+                    {
+                        var encryptMd5Password = Encryptor.MD5Hash(employee.Password);
+                        employee.Password = encryptMd5Password;
+                    }
                 }
                 var result = dao.Update(employee);
                 if (result)

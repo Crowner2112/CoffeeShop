@@ -111,7 +111,7 @@ namespace CoffeeShop.Controllers
             {
                 throw;
             }
-            return Redirect("/Success");
+            return Redirect("/Cart/Success");
         }
         public ActionResult Success()
         {

@@ -33,7 +33,7 @@ namespace Models.EF
         public DateTime? CreateDate { get; set; }
 
         public bool? Status { get; set; }
-
+        
         public int? ViewCount { get; set; }
 
         [StringLength(250)]

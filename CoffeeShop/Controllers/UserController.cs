@@ -4,6 +4,7 @@ using Models.DAO;
 using Models.EF;
 using System;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CoffeeShop.Controllers
 {
@@ -33,11 +34,12 @@ namespace CoffeeShop.Controllers
                     customerSession.Email = customer.Email;
                     Session.Add(CommonConstants.EMPLOYEE_SESSION, customerSession);
                     Session["Account"] = customer.CustomerName;
+                    Session["Id"] = customer.CustomerID;
                     return Redirect("/");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Incorect email or password");
+                    ModelState.AddModelError("", "Sai email hoặc mật khẩu!");
                 }
             }
             return View(model);
@@ -83,6 +85,40 @@ namespace CoffeeShop.Controllers
                 }
             }
             return View(model);
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Edit(string id)
+        {
+            var customer = new CustomerDao().ViewDetail(int.Parse(id));
+            return View(customer);
+        }
+        [HttpPost]
+        public ActionResult Edit(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new CustomerDao();
+                var rawCustomer = dao.ViewDetail(customer.CustomerID);
+                customer.CustomerID = rawCustomer.CustomerID;
+                customer.Password = rawCustomer.Password;
+                customer.CreatedDate = rawCustomer.CreatedDate;
+                bool result = dao.Update(customer);
+                if (result)
+                {
+                    Session["Success"] = "Sửa thành công!";
+                    return RedirectToAction("Edit", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Modify Customer successfully");
+                }
+            }
+            return View("Index");
         }
     }
 }

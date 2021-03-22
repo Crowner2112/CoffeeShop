@@ -18,13 +18,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 </head>
 <body>
-    <!-- Preloader -->
+    <style>
+        .acc-opt {
+            position: relative;
+        }
+
+        .acc-opt-menu {
+            display: none;
+            position: absolute;
+            width: 140px;
+            z-index: 10;
+            background: black;
+            border-bottom-left-radius: 20%;
+            border-bottom-right-radius: 20%;
+        }
+
+            .acc-opt-menu li a {
+                font-size: 10px;
+                padding-bottom: 5px;
+            }
+
+        .acc-opt:hover .acc-opt-menu {
+            display: block;
+        }
+    </style>
     <div id="loader-wrapper">
         <div id="loader"></div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-    <!-- End Preloader -->
     <div class="tm-top-header">
         <div class="container">
             <div class="row">
@@ -53,8 +75,17 @@
                             else
                             {
                                 var names = Session["Account"].ToString().Split(' ');
-                                <li style="margin-top: 15px">
-                                        Xin chào: @names[2]
+                                <li class="acc-opt" style="margin-top: 15px">
+                                    Xin chào: @names[2]
+                                    <ul class="acc-opt-menu">
+                                        <li>
+                                            <a href="/User/Edit/@Session["Id"]">Sửa thông tin</a>
+                                        </li>
+                                        <li>
+                                            <a href="/User/ChangePassword/@Session["Id"]">Đổi mật khẩu</a>
+                                        </li>
+                                        <li><a href="/User/Logout" style="padding-bottom: 15px;">Đăng xuất</a></li>
+                                    </ul>
                                 </li>
                             }
                         </ul>
