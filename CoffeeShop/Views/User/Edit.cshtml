@@ -1,0 +1,134 @@
+﻿@model Models.EF.Customer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section topmenu{
+    <div class="tm-top-header">
+        <div class="container">
+            <div class="row">
+                <div class="tm-top-header-inner">
+                    <div class="tm-logo-container">
+                        <img src="~/Assest/Client/img/logo.png" alt="Logo" class="tm-site-logo">
+                        <h1 class="tm-site-name tm-handwriting-font">Cafe House</h1>
+                    </div>
+                    <div class="mobile-menu-icon">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="tm-nav">
+                        <ul>
+                            <li><a href="/Home">Trang chủ</a></li>
+                            <li><a href="/News">Tin tức</a></li>
+                            <li><a href="/Product">Menu</a></li>
+                            <li><a href="/Contact">Liên hệ</a></li>
+                            <li><a href="/Cart"><i class="fas fa-shopping-cart" style="margin-right: 5px"></i>Giỏ hàng</a></li>
+                            @{
+                                var session = (EmployeeLogin)Session[CoffeeShop.Common.CommonConstants.EMPLOYEE_SESSION];
+                            }
+                            @if (session == null)
+                            {
+                                <li><a href="/User/Login">Đăng ký / Đăng nhập</a></li>
+                            }
+                            else
+                            {
+                                var names = Session["Account"].ToString().Split(' ');
+                                <li class="acc-opt" style="margin-top: 15px">
+                                    Xin chào: @names[2]
+                                    <ul class="acc-opt-menu">
+                                        <li>
+                                            <a href="/User/Edit/@Session["Id"]">Sửa thông tin</a>
+                                        </li>
+                                        <li>
+                                            <a href="/User/ChangePassword/@Session["Id"]">Đổi mật khẩu</a>
+                                        </li>
+                                        <li style="border-bottom-left-radius: 50%"><a href="/User/Logout" style="padding-bottom: 15px">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<h2>Chỉnh sửa thông tin</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @if(Session["Success"] != null)
+        {
+            <h4 class="text-success">Sửa thành công!</h4>
+        }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CustomerID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerName, "Họ và tên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DOB, "Ngày sinh", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6" style="display: flex">
+                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, "Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, "Số điện thoại", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section jsFooter{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1980:2021",
+                showOn: "both",
+                buttonText: "<i class='fas fa-calendar-alt'></i>"
+            });
+        });
+    </script>
+}

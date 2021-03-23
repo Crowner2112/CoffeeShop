@@ -80,7 +80,7 @@ namespace Models.DAO
         public static void UpdateViewCount(int id)
         {
             var product = db.Products.Find(id);
-            if (product.ViewCount == null)
+            if (product.ViewCount == 0)
             {
                 product.ViewCount = 1;
             }

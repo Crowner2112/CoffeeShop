@@ -27,6 +27,7 @@ namespace CoffeeShop.Areas.Admin.Controllers
                     employeeSession.Email = employee.Email;
                     Session.Add(CommonConstants.EMPLOYEE_SESSION, employeeSession);
                     Session["Account"] = employee.EmployeeName;
+                    Session["Image"] = employee.Image;
                     return RedirectToAction("Index", "Home");
                 }
                 else if (result == 0)
