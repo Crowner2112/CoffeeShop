@@ -2,7 +2,9 @@ namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
     [Table("Bill")]
     public partial class Bill
@@ -21,6 +23,8 @@ namespace Models.EF
         public int EmployeeID { get; set; }
 
         public int ShopID { get; set; }
+
+        public decimal? Total { get; set; }
 
         public virtual Employee Employee { get; set; }
 

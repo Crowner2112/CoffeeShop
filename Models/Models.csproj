@@ -83,6 +83,7 @@
     <Compile Include="DAO\CustomerDao.cs" />
     <Compile Include="DAO\EmployeeDao.cs" />
     <Compile Include="DAO\EventDao.cs" />
+    <Compile Include="DAO\IngredientDao.cs" />
     <Compile Include="DAO\NewsDao.cs" />
     <Compile Include="DAO\OrderDao.cs" />
     <Compile Include="DAO\OrderDetailDao.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="EF\Customer.cs" />
     <Compile Include="EF\Employee.cs" />
     <Compile Include="EF\Event.cs" />
+    <Compile Include="EF\Ingredient.cs" />
     <Compile Include="EF\News.cs" />
     <Compile Include="EF\Order.cs" />
     <Compile Include="EF\OrderDetail.cs" />

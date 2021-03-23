@@ -4,7 +4,7 @@ namespace Models.EF
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web.Mvc;
+    using System.Data.Entity.Spatial;
 
     [Table("Product")]
     public partial class Product
@@ -33,13 +33,12 @@ namespace Models.EF
         public DateTime? CreateDate { get; set; }
 
         public bool? Status { get; set; }
-        
+
         public int? ViewCount { get; set; }
 
         [StringLength(250)]
         public string Image { get; set; }
 
-        [AllowHtml]
         [Column(TypeName = "ntext")]
         public string Discription { get; set; }
 

@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\EventController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
@@ -1885,6 +1886,9 @@
     <Content Include="Assest\Admin\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
     <Content Include="Assest\Admin\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
     <Content Include="Assest\Admin\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="Areas\Admin\Views\Ingredient\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

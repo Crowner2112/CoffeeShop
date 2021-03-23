@@ -4,6 +4,7 @@ namespace Models.EF
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
     [Table("Customer")]
     public partial class Customer
@@ -16,9 +17,11 @@ namespace Models.EF
 
         public int CustomerID { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string CustomerName { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime? DOB { get; set; }
 
         [Required]

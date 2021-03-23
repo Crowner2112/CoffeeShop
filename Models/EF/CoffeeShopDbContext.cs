@@ -1,4 +1,7 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Models.EF
 {
@@ -15,6 +18,7 @@ namespace Models.EF
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
@@ -25,7 +29,16 @@ namespace Models.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Bill>()
+                .Property(e => e.Total)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Bill>()
                 .HasMany(e => e.BillDetails)
+                .WithRequired(e => e.Bill)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Bill>()
+                .HasMany(e => e.Shippers)
                 .WithRequired(e => e.Bill)
                 .WillCascadeOnDelete(false);
 
@@ -76,6 +89,10 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
+                .Property(e => e.Total)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Order>()
                 .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Order)
                 .WillCascadeOnDelete(false);
@@ -83,6 +100,10 @@ namespace Models.EF
             modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.EventCode)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Price)
@@ -111,6 +132,5 @@ namespace Models.EF
                 .WithRequired(e => e.Shop)
                 .WillCascadeOnDelete(false);
         }
-
     }
 }

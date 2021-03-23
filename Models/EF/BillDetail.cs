@@ -1,19 +1,16 @@
 namespace Models.EF
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
     [Table("BillDetail")]
     public partial class BillDetail
     {
-        [Key]
-        public int BillDetailID { get; set; }
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BillID { get; set; }
 
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductID { get; set; }
 
         public byte? Quantity { get; set; }
@@ -21,6 +18,8 @@ namespace Models.EF
         public int? Warranty { get; set; }
 
         public decimal? Total { get; set; }
+
+        public int BillDetailID { get; set; }
 
         public virtual Bill Bill { get; set; }
 
