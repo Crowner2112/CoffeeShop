@@ -42,6 +42,9 @@
                                         <li>
                                             <a href="/User/ChangePassword/@Session["Id"]">Đổi mật khẩu</a>
                                         </li>
+                                        <li>
+                                            <a href="/User/ViewHistory/@Session["Id"]">Lịch sử mua hàng</a>
+                                        </li>
                                         <li><a href="/User/Logout" style="padding-bottom: 15px;">Đăng xuất</a></li>
                                     </ul>
                                 </li>
@@ -127,8 +130,6 @@
                     url: 'Cart/DeleteAllCart',
                     type: 'GET'
                 }).done(function () {
-                    table.remove();
-                    buttons.remove();
                     alert("Giỏ hàng đã được xóa");
                     location.replace("/Product");
                 })

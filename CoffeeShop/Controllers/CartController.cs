@@ -117,10 +117,10 @@ namespace CoffeeShop.Controllers
         public ActionResult Delete(int id)
         {
             var cart = (List<CartItem>)Session[CartSession];
-            var item = cart.Find(x=>x.Product.ProductID == id);
+            var item = cart.Find(x => x.Product.ProductID == id);
             cart.Remove(item);
             Session[CartSession] = cart;
-            return RedirectToAction("Index","Cart");
+            return RedirectToAction("Index", "Cart");
         }
         public ActionResult DeleteAllCart()
         {
@@ -128,6 +128,12 @@ namespace CoffeeShop.Controllers
             cart.Clear();
             Session[CartSession] = cart;
             return RedirectToAction("Index", "Cart");
+        }
+        private bool CheckIngredient(int id)
+        {
+            var result = IngredientDao.UpdateQuantity(id);
+            if (result) return true;
+            else return false;
         }
     }
 }

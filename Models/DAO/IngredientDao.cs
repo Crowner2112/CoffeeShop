@@ -68,6 +68,21 @@ namespace Models.DAO
                 return false;
             }
         }
+        public static bool MultiUpdateQuantity(int id, int timesOfTheRequest)
+        {
+            try
+            {
+                var item = db.Ingredients.Find(id);
+                item.Quantity -= (2*timesOfTheRequest);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                //logging
+                return false;
+            }
+        }
         public bool Delete(int id)
         {
             try
