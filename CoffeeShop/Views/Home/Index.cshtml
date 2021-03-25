@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    var id = Session["Id"];
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -79,10 +80,13 @@
                                     Xin chào: @names[2]
                                     <ul class="acc-opt-menu">
                                         <li>
-                                            <a href="/User/Edit/@Session["Id"]">Sửa thông tin</a>
+                                            <a href="/User/Edit/@id">Sửa thông tin</a>
                                         </li>
                                         <li>
-                                            <a href="/User/ChangePassword/@Session["Id"]">Đổi mật khẩu</a>
+                                            <a href="/User/ChangePassword/@id">Đổi mật khẩu</a>
+                                        </li>
+                                        <li>
+                                            <a href="/User/ViewHistory/@id">Lịch sử mua hàng</a>
                                         </li>
                                         <li><a href="/User/Logout" style="padding-bottom: 15px;">Đăng xuất</a></li>
                                     </ul>

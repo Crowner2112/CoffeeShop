@@ -87,11 +87,11 @@ namespace CoffeeShop.Controllers
             return View(list);
         }
         [HttpPost]
-        public ActionResult Payment(string shipName, string mobile, string address, string email)
+        public ActionResult RequestPayment(int customerId)
         {
             var order = new Order();
             order.CreatedDate = DateTime.Now;
-            order.CustomerID = null;
+            order.CustomerID = customerId;
             try
             {
                 var id = new OrderDao().Insert(order);
@@ -107,15 +107,27 @@ namespace CoffeeShop.Controllers
                     detailDao.Insert(orderDetail);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
-            return Redirect("/Cart/Success");
+            return RedirectToAction("Index", "Home");
         }
-        public ActionResult Success()
+        [HttpDelete]
+        public ActionResult Delete(int id)
         {
-            return View();
+            var cart = (List<CartItem>)Session[CartSession];
+            var item = cart.Find(x=>x.Product.ProductID == id);
+            cart.Remove(item);
+            Session[CartSession] = cart;
+            return RedirectToAction("Index","Cart");
+        }
+        public ActionResult DeleteAllCart()
+        {
+            var cart = (List<CartItem>)Session[CartSession];
+            cart.Clear();
+            Session[CartSession] = cart;
+            return RedirectToAction("Index", "Cart");
         }
     }
 }

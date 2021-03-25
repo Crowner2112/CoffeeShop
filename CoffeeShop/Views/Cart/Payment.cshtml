@@ -1,6 +1,6 @@
 ﻿@model List<CoffeeShop.Models.CartItem>
 @{
-
+    var id = (int)Session["Id"];
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -24,6 +24,29 @@
                             <li><a href="/Product">Menu</a></li>
                             <li><a href="/Contact">Liên hệ</a></li>
                             <li><a href="/Cart" class="active"><i class="fas fa-shopping-cart" style="margin-right: 5px"></i>Giỏ hàng</a></li>
+                            @{
+                                var session = (EmployeeLogin)Session[CoffeeShop.Common.CommonConstants.EMPLOYEE_SESSION];
+                            }
+                            @if (session == null)
+                            {
+                                <li><a href="/User/Login">Đăng ký / Đăng nhập</a></li>
+                            }
+                            else
+                            {
+                                var names = Session["Account"].ToString().Split(' ');
+                                <li class="acc-opt" style="margin-top: 15px">
+                                    Xin chào: @names[2]
+                                    <ul class="acc-opt-menu">
+                                        <li>
+                                            <a href="/User/Edit/@Session["Id"]">Sửa thông tin</a>
+                                        </li>
+                                        <li>
+                                            <a href="/User/ChangePassword/@Session["Id"]">Đổi mật khẩu</a>
+                                        </li>
+                                        <li><a href="/User/Logout" style="padding-bottom: 15px;">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                     </nav>
                 </div>
@@ -96,19 +119,21 @@
 
 @section jsFooter{
     <script>
-        var UrlPayment = '@Url.Action("Payment","Cart")';
+        var UrlPayment = '@Url.Action("RequestPayment", "Cart", new { customerId = Session["Id"]})'
         function Payment() {
             $.ajax({
                 url: UrlPayment,
                 dataType: 'html',
                 type: 'POST',
+                async: true,
                 success: function (res) {
                     if (res.status == true) {
-                        alert("Thanh toán thành công!");
-                    }
-                    else {
                         alert("Thanh toán không thành công!");
                     }
+                    else {
+                        alert("Thanh toán thành công! Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!");
+                    }
+                    location.replace("/Home")
                 }
             })
         }

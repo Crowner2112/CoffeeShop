@@ -3,6 +3,8 @@ using CoffeeShop.Models;
 using Models.DAO;
 using Models.EF;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -119,6 +121,12 @@ namespace CoffeeShop.Controllers
                 }
             }
             return View("Index");
+        }
+        public ActionResult ViewHistory(int id)
+        {
+            var dao = new OrderDetailDao();
+            var model = dao.ListAllHistory(id, 1, 10);
+            return View(model);
         }
     }
 }

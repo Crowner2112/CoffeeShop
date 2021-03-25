@@ -46,11 +46,11 @@
                                     <td>@item.CreatedDate</td>
                                     <td>@item.Customer.CustomerName</td>
                                     <td style="display: flex">
+                                        <form style="margin-right: 5px" action="/Admin/OrderDetail/Index/@item.OrderID">
+                                            <button type="submit" class="btn btn-secondary btn-fw">Detail</button>
+                                        </form>
                                         <form style="margin-right: 5px" action="/Admin/Order/Edit/@item.OrderID">
                                             <button type="submit" class="btn btn-primary btn-fw">Modify</button>
-                                        </form>
-                                        <form style="margin-right: 5px" action="/Admin/OrderDetail/Index/@item.OrderID">
-                                            <button type="submit" class="btn btn-primary btn-fw">Detail</button>
                                         </form>
                                         @Ajax.ActionLink("Delete", "Delete", new { id = item.OrderID },
                                        new AjaxOptions
@@ -60,9 +60,6 @@
                                            HttpMethod = "Delete"
                                        }, new { @class = "btn btn-danger btn-fw" })
                                     </td>
-                                    <form style="margin-right: 5px" action="/Admin/OrderDetail/Index/@item.OrderID">
-                                        <button type="submit" class="btn btn-primary btn-fw">Detail</button>
-                                    </form>
                                 </tr>
                             }
                         </tbody>

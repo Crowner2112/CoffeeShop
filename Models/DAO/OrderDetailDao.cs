@@ -74,5 +74,19 @@ namespace Models.DAO
                 return false;
             }
         }
+        public IEnumerable<OrderDetail> ListAllHistory(int id, int page, int pageSize)
+        {
+            IQueryable<OrderDetail> model = db.OrderDetails;
+            string customerId = id.ToString();
+            if (!string.IsNullOrEmpty(customerId))
+            {
+                model = model.Where(x => x.Order.CustomerID == id);
+            }
+            else
+            {
+                model = Enumerable.Empty<OrderDetail>().AsQueryable();
+            }
+            return model.OrderBy(x => x.OrderDetailID).ToPagedList(page, pageSize);
+        }
     }
 }
