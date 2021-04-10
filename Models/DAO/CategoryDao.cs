@@ -16,7 +16,6 @@ namespace Models.DAO
         public int Insert(Category entity)
         {
             db.Categories.Add(entity);
-            db.SaveChanges();
             return entity.CategoryID;
         }
         public IEnumerable<Category> ListAllPaging(string searchString, int page, int pageSize)
